@@ -1,0 +1,13 @@
+# Ignore generated playbook output folder
+crypto-playbook/
+
+# Media outputs
+clips/
+pdf/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

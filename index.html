@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Chart Playbook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Crypto Chart Playbook</h1>
+<p class="subtitle">Structure-first | Pullback-only | Any coin</p>
+
+<!-- DAILY BIAS -->
+<section class="bias">
+  <h2>🧭 Daily Bias</h2>
+  <ul>
+    <li><strong>Market Risk:</strong> ON / OFF</li>
+    <li><strong>Primary Focus:</strong> SOL, LTC</li>
+    <li><strong>Today’s Rule:</strong> Only add on pullbacks</li>
+  </ul>
+
+  <div class="bias-form">
+    <label>Market Risk:
+      <select id="marketRisk">
+        <option>ON</option>
+        <option>OFF</option>
+      </select>
+    </label>
+
+    <label>Primary Focus:
+      <input id="primaryFocus" type="text" value="SOL, LTC">
+    </label>
+
+    <label>Note (one sentence):
+      <input id="biasNote" type="text" placeholder="Why trade or not today">
+    </label>
+
+    <button id="saveBiasBtn">Save Daily Bias</button>
+  </div>
+
+  <div class="bias-log" id="biasLog">
+    <h3>Bias Log</h3>
+    <div class="log-controls">
+      <button id="exportBiasBtn">Export CSV</button>
+      <button id="clearBiasBtn">Clear Log</button>
+    </div>
+    <ul id="biasEntries"></ul>
+  </div>
+</section>
+
+<!-- UNIVERSAL RULES -->
+<section>
+  <button onclick="toggle('rules')">📘 Universal Rules</button>
+  <div id="rules" class="content">
+    <ul>
+      <li>Decide bias on 4H, execute on 1H</li>
+      <li>Strength ≠ Entry</li>
+      <li>Pullbacks = Opportunity</li>
+      <li>Middle of range = No trade</li>
+      <li>No impulse candles</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOL MODULE -->
+<section>
+  <button onclick="toggle('sol')">🟢 SOL — Trend Pullback Module</button>
+  <div id="sol" class="content">
+    <h3>Market Type: Trend</h3>
+
+    <div class="box">
+      <p><strong>Primary Add Zone:</strong> 129 – 127</p>
+      <p><strong>Invalidation:</strong> 4H close below EMA50</p>
+    </div>
+
+    <video controls loop>
+      <source src="clips/trend_pullback.mp4" type="video/mp4">
+    </video>
+
+    <h4>Conditions Required</h4>
+    <ul>
+      <li>Price above EMA200</li>
+      <li>EMA20 above EMA50</li>
+      <li>RSI (1H) pulls back to 50–60</li>
+      <li>No fast rejection</li>
+    </ul>
+
+    <h4>Alerts to Set</h4>
+    <ul>
+      <li>SOL hits 129</li>
+      <li>SOL hits 127</li>
+      <li>SOL 4H close below EMA50</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LTC MODULE -->
+<section>
+  <button onclick="toggle('ltc')">🔵 LTC — Breakout Retest Module</button>
+  <div id="ltc" class="content">
+    <h3>Market Type: Early Trend</h3>
+
+    <div class="box">
+      <p><strong>Primary Add Zone:</strong> 80.5 – 79.8</p>
+      <p><strong>Secondary Add:</strong> 78.5 – 77.8 (small size)</p>
+      <p><strong>Invalidation:</strong> 4H close below 77.4</p>
+    </div>
+
+    <video controls loop>
+      <source src="clips/range_rotation.mp4" type="video/mp4">
+    </video>
+
+    <h4>Conditions Required</h4>
+    <ul>
+      <li>Former resistance acting as support</li>
+      <li>RSI (1H) holds above ~45</li>
+      <li>No fast rejection</li>
+    </ul>
+
+    <h4>Alerts to Set</h4>
+    <ul>
+      <li>LTC hits 80.5</li>
+      <li>LTC hits 79.8</li>
+      <li>LTC 4H close below 77.4</li>
+    </ul>
+  </div>
+</section>
+
+<!-- NO TRADE -->
+<section>
+  <button onclick="toggle('notrade')">⛔ No-Trade Conditions</button>
+  <div id="notrade" class="content">
+    <video controls loop>
+      <source src="clips/no_trade_chop.mp4" type="video/mp4">
+    </video>
+    <ul>
+      <li>Mid-range price</li>
+      <li>RSI ~50</li>
+      <li>Flat EMA200</li>
+      <li>No directional follow-through</li>
+    </ul>
+    <p><strong>Action:</strong> Do nothing.</p>
+  </div>
+</section>
+
+<!-- PDF LINK -->
+<section class="footer">
+  <p>📄 Reference PDF: <a href="pdf/pullback-playbook-sol-ltc.pdf">Open SOL & LTC PDF</a></p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
