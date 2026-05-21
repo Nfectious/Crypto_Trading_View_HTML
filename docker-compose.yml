@@ -1,0 +1,40 @@
+services:
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ${POSTGRES_DB:-valkyrie}
+      POSTGRES_USER:     ${POSTGRES_USER:-valkyrie_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U ${POSTGRES_USER:-valkyrie_user} -d ${POSTGRES_DB:-valkyrie}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  scanner:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # Override whatever POSTGRES_HOST is in .env so the scanner always
+      # reaches the postgres service by its Docker network name.
+      POSTGRES_HOST: postgres
+    volumes:
+      - scanner_logs:/opt/valkyrie/logs
+
+volumes:
+  postgres_data:
+  scanner_logs:
